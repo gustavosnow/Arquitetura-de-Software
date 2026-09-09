@@ -22,6 +22,26 @@ git clone https://github.com/gustavosnow/Atividade-01-Arquitetura-de-Software.gi
 cd Atividade-01-Arquitetura-de-Software
 ```
 
+## Arquitetura em Camadas — execução
+
+- **Pré-requisitos:** Python >= 3.10
+- **Como executar:**
+
+```bash
+cd "Arquitetura em Camadas"
+# (opcional) criar e ativar virtualenv
+python -m venv .venv
+.venv\Scripts\activate  # Windows (PowerShell/CMD)
+# macOS/Linux: source .venv/bin/activate
+python main.py
+```
+
+- **Observações:**
+	- O exemplo grava/append no arquivo `vendas.txt` dentro da pasta `Arquitetura em Camadas`.
+	- Não há dependências externas além de Python 3.10+.
+	- Arquivos relevantes: `codigo_legado.py`, `codigo_refatorado.py`, `interfaces.py`, `servico.py`, `repositorios.py`, `notificadores.py`, `main.py`.
+
+
 Para a pasta TypeScript (se for necessário executar):
 
 ```bash
