@@ -26,6 +26,8 @@ def main() -> None:
     )
     servico_email.processar(cliente="Marina Dias", valor=80.0, contato="marina@email.com")
 
+    servico_email.processar(cliente="Gustavo Lima", valor=120.0, contato="gustavo@email.com")
+
 
 if __name__ == "__main__":
     main()
