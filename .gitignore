@@ -1,0 +1,31 @@
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# TypeScript
+dist/
+build/
+*.tsbuildinfo
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Misc
+*.tgz
+coverage/
+.idea/
