@@ -1,41 +1,88 @@
-# Atividade Prática: Refatoração de Arquitetura de Software
+﻿# Acervo - Atividade de Arquitetura de Software
 
-* **Aluno(a):** Gustavo Neves Coelho
-* **Matrícula:** 20240022476
-* **Disciplina:** Arquitetura de Software - Prof. Jacqueline Teixeira
+Este repositório foi convertido em um acervo de trabalhos, exercícios e materiais relacionados à disciplina/atividade de Arquitetura de Software.
 
-**1. Análise do Código Legado e Violações Encontradas**
-No código original fornecido, observamos os seguintes problemas estruturais:
+## Visão geral
 
-**- Alto Acoplamento Concreto:**
-A classe GeradorRelatorioLegado instancia diretamente classes de infraestrutura (new MySQLConnection() e new SmtpEmailSender()), gerando um forte grau de dependência entre módulos e amarrando a regra de negócio a implementações rígidas em vez de contratos estáveis.
+- **Objetivo:** centralizar implementações, refatorações e anotações de estudo para consulta e contribuição.
+- **Público-alvo:** estudantes, instrutores e mantenedores do acervo.
 
-**- Violação do DIP:**
-Os módulos de alto nível (a geração de relatórios) dependem diretamente de módulos de baixo nível (infraestrutura de banco de dados e envio de e-mail), contrariando a Inversão de Dependência, que estabelece que ambos devem depender de abstrações e interfaces bem definidas.
+## Estrutura do repositório
 
-**- Violação do OCP:**
-Para estender ou modificar a fonte de dados (ex.: trocar o banco) ou o canal de notificação (ex.: adicionar envio via WhatsApp ou Slack), é obrigatório editar o código interno da própria classe GeradorRelatorioLegado, ferindo a capacidade de evolução sem quebra de código.
+- `AGENTS.md` — diretrizes e práticas para agentes e contribuintes.
+- `Arquitetura em Camadas/` — exemplos e código legado (Python) relacionados a arquitetura em camadas.
+- `Refatoração Arquitetural/` — atividade TypeScript com `package.json`, fontes e scripts.
 
-**- Impossibilidade de Testes Unitários:**
-Não é possível testar de maneira isolada a lógica do relatório em um nível micro de Design de Software, pois o ciclo de vida dos componentes externos está embutido de forma fixa, impossibilitando a substituição por implementações simuladas (mocks ou stubs).
+## Começando
 
-**2. Mudanças Efetuadas e Justificativa Técnica**
-
-**2.1 Criação de Contratos (Interfaces):**
-- Justificativa:
-Criação de fronteiras explícitas (RepositorioDados e ServicoNotificacao) para que os componentes se comuniquem exclusivamente por meio de interfaces públicas e estáveis, encapsulando os detalhes de implementação e garantindo baixo acoplamento.
-
-**2.2 Injeção de Dependência (DI):**
-- Justificativa:
-Aplicação prática da Inversão de Controle (IoC) ao fornecer as dependências externamente via construtor (constructor), eliminando o uso do operador new dentro da regra de negócio e permitindo a substituição transparente de tecnologias.
-
----
-
-### 3. Como Executar o Projeto
+Clone o repositório:
 
 ```bash
-# Instalar dependências
-npm install
+git clone https://github.com/gustavosnow/Atividade-01-Arquitetura-de-Software.git
+cd Atividade-01-Arquitetura-de-Software
+```
 
-# Compilar e executar o código refatorado
-npm start
+Para a pasta TypeScript (se for necessário executar):
+
+```bash
+cd "Refatoração Arquitetural"
+npm install
+# Verifique os scripts disponíveis em package.json
+npm run build
+npm run dev
+```
+
+Observação: `node_modules/` está listado em `.gitignore`; não comite dependências.
+
+## Como contribuir
+
+1. Abra uma issue descrevendo a proposta.
+2. Crie uma branch com prefixo `feature/` ou `fix/`.
+3. Faça mudanças pequenas e documentadas; inclua exemplos ou testes mínimos quando aplicável.
+4. Envie um pull request com referência à issue e descrição das mudanças.
+
+Para alterações arquiteturais maiores, solicite revisão explícita antes de mesclar.
+
+## Boas práticas
+
+- Preserve separação de responsabilidades entre camadas.
+- Documente suposições antes de introduzir dependências ou scaffolding.
+- Não inclua segredos em texto claro; remova ou sinalize credenciais encontradas.
+
+## Arquivo de diretrizes
+
+Leia `AGENTS.md` antes de aplicar alterações significativas — ele contém convenções e regras de segurança para intervenções automatizadas e humanas.
+
+## Manutenção
+
+- **Mantido por:** proprietário da pasta geral dos trabalhos.
+- **Changelog (seleção):**
+	- 2026-09-09: Repositório convertido em acervo; adicionado `.gitignore` e `AGENTS.md` central.
+
+## Validação de mensagens de commit
+
+Este repositório valida mensagens de commit automaticamente via GitHub Actions usando `commitlint`.
+
+Para ativar verificação local (opcional):
+
+1. Instale dependências de desenvolvimento no root:
+
+```bash
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
+```
+
+2. (Opcional) Instale e configure `husky` para hooks locais:
+
+```bash
+npm install --save-dev husky
+npx husky install
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+3. Alternativamente, defina hooks locais com `core.hooksPath` apontando para `.githooks/` e crie um script `commit-msg` que chame `npx commitlint --edit "$1"`.
+
+A configuração do `commitlint` está em `commitlint.config.js` e as regras de boas práticas de commits estão em `COMMIT_GUIDELINES.md`.
+
+## Contato
+
+Abra uma issue para dúvidas, sugestões ou solicitações de organização do acervo.

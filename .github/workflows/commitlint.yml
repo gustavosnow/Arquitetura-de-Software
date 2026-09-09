@@ -1,0 +1,33 @@
+name: 'Commitlint'
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install commitlint
+        run: |
+          npm ci --no-audit --no-fund || true
+          npm install --no-save @commitlint/cli @commitlint/config-conventional
+
+      - name: Run commitlint for range
+        env:
+          GITHUB_BASE_REF: ${{ github.event.pull_request.base.sha || 'origin/main' }}
+        run: |
+          BASE=${{ github.event.pull_request.base.sha || 'origin/main' }}
+          echo "Base: $BASE"
+          # Linta os commits entre base e head
+          npx commitlint --from=$BASE --to=HEAD || exit 1
