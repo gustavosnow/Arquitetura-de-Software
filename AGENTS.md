@@ -58,3 +58,9 @@ Este documento busca equilibrar segurança e agilidade em ambientes de aprendiza
 - criar um checklist de verificação automatizável (script) para início rápido.
 
 Escolha uma ação e eu executo.
+
+Diretrizes de commit
+
+- As mensagens de commit deste acervo devem ser escritas em português seguindo o padrão definido em `COMMIT_GUIDELINES.md`.
+- Use verbos no imperativo e resumos curtos; inclua corpo quando necessário para justificar mudanças.
+- Consulte `COMMIT_GUIDELINES.md` para exemplos e recomendações de tipos e escopos.
